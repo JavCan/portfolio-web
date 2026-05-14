@@ -38,6 +38,8 @@ export default function VerticalGallery({ items, onCenterClick }: VerticalGaller
   const centerItemRef = useRef<CarouselItem | null>(null);
   // Pointer position at mousedown — to distinguish click from drag
   const pointerDownPos = useRef({ x: 0, y: 0 });
+  // Track if the initial press was specifically on the center card
+  const wasCenterClicked = useRef(false);
 
   const CARD_HEIGHT = 220;
   const CARD_GAP = 28;
@@ -76,6 +78,11 @@ export default function VerticalGallery({ items, onCenterClick }: VerticalGaller
 
   // Mouse/touch drag handlers
   const onPointerDown = useCallback((e: React.PointerEvent) => {
+    // Check if the click target is the center card or inside it
+    const target = e.target as HTMLElement;
+    const centerCardEl = target.closest('[data-is-center="true"]');
+    wasCenterClicked.current = !!centerCardEl;
+
     isDragging.current = true;
     dragStart.current = e.clientY;
     dragScrollStart.current = scrollRef.current.target;
@@ -91,10 +98,14 @@ export default function VerticalGallery({ items, onCenterClick }: VerticalGaller
 
   const onPointerUp = useCallback((e: React.PointerEvent) => {
     isDragging.current = false;
-    // Treat as click only if the pointer barely moved (< 6px) — i.e. not a drag
+    
+    // Treat as click only if:
+    // 1. The pointer barely moved (< 6px)
+    // 2. The click started on the center card
     const dx = Math.abs(e.clientX - pointerDownPos.current.x);
     const dy = Math.abs(e.clientY - pointerDownPos.current.y);
-    if (Math.sqrt(dx * dx + dy * dy) < 6) {
+    
+    if (Math.sqrt(dx * dx + dy * dy) < 6 && wasCenterClicked.current) {
       // Fire callback with whatever item is currently in the center
       const center = centerItemRef.current;
       if (center) onCenterClick?.(center);
@@ -190,6 +201,7 @@ export default function VerticalGallery({ items, onCenterClick }: VerticalGaller
       {sorted.map(({ item, y, scale, opacity, xOffset, key, isCenter }) => (
         <div
           key={key}
+          data-is-center={isCenter}
           style={{
             position: 'absolute',
             left: `calc(50% - ${160 + xOffset}px)`,

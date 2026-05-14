@@ -6,6 +6,7 @@ interface ProjectData {
   image: string;
   description?: string;
   media?: string[];
+  videos?: string[];
 }
 
 interface ProjectOverlayProps {
@@ -13,69 +14,44 @@ interface ProjectOverlayProps {
   onClose: () => void;
 }
 
-const PROJECT_DETAILS: Record<string, { description: string; tags: string[]; year: string; role: string }> = {
+const PROJECT_DETAILS: Record<string, { description: string; tags: string[]; year: string; role: string; videos?: string[] }> = {
   'Pulse': {
-    description: `Pulse is a real-time health monitoring platform designed to bring clarity to complex medical data. 
-    It aggregates biometric signals from wearable devices and presents them through an intuitive, clinician-friendly dashboard.
-    
-    The platform supports multi-patient monitoring, smart alerting, and historical trend analysis. Built with scalability in mind, 
-    Pulse handles thousands of concurrent data streams without sacrificing speed or accuracy.
-    
-    One of the core challenges was designing a system that could surface critical information at a glance while keeping 
-    the interface uncluttered for everyday use. The result is a layered UI that reveals depth on demand.`,
-    tags: ['React', 'Node.js', 'WebSocket', 'PostgreSQL', 'Docker'],
-    year: '2024',
-    role: 'Full-Stack Developer',
+    description: `A mobile application created for the Swift Student Challenge, designed to support users during moments of stress and anxiety. The app provides guided breathing exercises, meditation sessions, and calming audio tools through an accessible and intuitive interface. The project focused heavily on smooth user interaction, emotional-centered design, and performance optimization.`,
+    tags: ['SwiftUI'],
+    year: '2026',
+    role: 'Mobile Developer',
+    videos: ['https://vimeo.com/1191005527?fl=tl&fe=ec'],
   },
   'Fraud Fishing': {
-    description: `Fraud Fishing is a machine-learning-powered detection engine that identifies anomalous financial transactions 
-    in real time. It was built to tackle the growing sophistication of fraud patterns that evade traditional rule-based systems.
-    
-    The model leverages behavioral fingerprinting, graph-based relationship analysis, and time-series anomaly detection 
-    to flag suspicious activity with minimal false positives.
-    
-    The system integrates directly into payment pipelines and generates human-readable explanations for every alert, 
-    enabling compliance teams to act quickly and confidently.`,
-    tags: ['Python', 'TensorFlow', 'FastAPI', 'Redis', 'Kafka'],
-    year: '2024',
-    role: 'ML Engineer & Backend Developer',
+    description: `A full-stack platform built to help users detect and report fraudulent websites through a simple and intuitive experience. The project includes an iOS application for submitting reports and a web dashboard for reviewing and visualizing reported data. I worked on API development, client-server communication, and creating clean interfaces focused on usability and efficiency.`,
+    tags: ['SwiftUI', 'Node.js', 'NestJS', 'MySQL'],
+    year: '2025',
+    role: 'Full-stack Developer',
+    videos: ['https://vimeo.com/1191001595?fl=tl&fe=ec'],
   },
   'MedSync': {
-    description: `MedSync is a cross-platform healthcare coordination app that bridges the gap between patients and their 
-    care teams. It synchronizes appointments, medications, lab results, and messaging into a single, unified experience.
-    
-    Designed with accessibility in mind, the app supports voice navigation, large-text modes, and offline-first 
-    functionality for low-connectivity environments.
-    
-    MedSync earned recognition for its onboarding flow, which guides first-time users through health profile setup 
-    with empathy-driven copy and zero technical jargon.`,
-    tags: ['React Native', 'Expo', 'Firebase', 'Quarkus', 'PostgreSQL'],
-    year: '2025',
-    role: 'Mobile & Backend Developer',
+    description: `A full-stack medical workflow and patient management system currently in development. The platform is designed to streamline medical data handling through RESTful APIs and modern frontend architecture. My focus has been on backend API design, HTTP communication, and building user-friendly interfaces that prioritize clarity and usability.`,
+    tags: ['React Native', 'Expo', 'React', 'Java', 'Quarkus', 'MySQL'],
+    year: '2026',
+    role: 'Full-stack Developer',
+    videos: ['https://vimeo.com/1191724675?fl=tl&fe=ec'],
   },
   'Firewall Defenders': {
-    description: `Firewall Defenders is a gamified cybersecurity training platform where players defend virtual networks 
-    against escalating threat scenarios. Each level introduces new attack vectors — DDoS floods, phishing injections, 
-    zero-day exploits — that must be neutralized using real security concepts.
-    
-    The game was designed to make cybersecurity education engaging and memorable, targeting both students and 
-    corporate training programs. Scenario completion unlocks detailed post-mortems explaining the real-world 
-    equivalents of each threat.`,
-    tags: ['Unity', 'C#', 'Photon', 'Node.js', 'MongoDB'],
-    year: '2023',
-    role: 'Game Developer & System Designer',
+    description: `A Tower Defense project developed in Unity alongside a telemetry and analytics dashboard. The system collects player behavior data in real time and displays engagement metrics through an interactive web interface. I contributed to gameplay systems, backend APIs, and the React dashboard focused on data visualization and user insights.`,
+    tags: ['Unity', 'C#', 'Node.js', 'MySQL', 'React', 'WebGL'],
+    year: '2025',
+    role: 'Game Developer & Full-stack Developer',
+    videos: [
+      'https://vimeo.com/1191007660?fl=tl&fe=ec',
+      'https://vimeo.com/1191418535?fl=tl&fe=ec'
+    ],
   },
   "ddplata's portfolio": {
-    description: `A personal portfolio site for ddplata, a multidisciplinary artist and digital creator. 
-    The design language was intentionally raw and experimental — layered textures, glitch effects, and unconventional 
-    grid layouts that reflect the artist's boundary-pushing aesthetic.
-    
-    The site features a custom CMS that allows the artist to update galleries, write blog posts, and manage 
-    commission requests without touching code. Performance was a core constraint, with all animations 
-    hardware-accelerated and images served via adaptive formats.`,
-    tags: ['Next.js', 'Three.js', 'GSAP', 'Sanity CMS', 'Vercel'],
-    year: '2024',
+    description: `A personal portfolio site for Danna Miranda (ddplata), an industrial designer. She wanted a portfolio that reflected her personality and style, but not just a simple page with photos and descriptions. Even thought she opted for a simple but not quite minimalist approach, I managed to create a unique experience through the use of 3D elements and animations that made the site stand out and feel original.`,
+    tags: ['Next.js', 'Three.js', 'React', 'Tailwind', 'Vercel'],
+    year: '2026',
     role: 'Frontend Developer & Designer',
+    videos: ['https://vimeo.com/1191418577?fl=tl&fe=ec'],
   },
 };
 
@@ -355,12 +331,39 @@ export default function ProjectOverlay({ project, onClose }: ProjectOverlayProps
                   Gallery & Media
                 </p>
 
-                {/* Main preview image */}
+                {/* Videos */}
+                {details?.videos && details.videos.length > 0 && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 24 }}>
+                    {details.videos.map((videoUrl, idx) => {
+                      const vimeoId = videoUrl.split('vimeo.com/')[1]?.split('?')[0];
+                      if (!vimeoId) return null;
+                      return (
+                        <div key={idx} style={{
+                          width: '100%',
+                          aspectRatio: '16/9',
+                          borderRadius: 12,
+                          overflow: 'hidden',
+                          border: '1px solid rgba(180,151,207,0.15)',
+                          boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
+                        }}>
+                          <iframe
+                            src={`https://player.vimeo.com/video/${vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+                            frameBorder="0"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                            style={{ width: '100%', height: '100%' }}
+                            title={`${project.name} video ${idx + 1}`}
+                          ></iframe>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Main preview image 
                 <div style={{
                   width: '100%',
                   borderRadius: 12,
                   overflow: 'hidden',
-                  marginBottom: 12,
                   border: '1px solid rgba(180,151,207,0.15)',
                   boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
                 }}>
@@ -369,35 +372,11 @@ export default function ProjectOverlay({ project, onClose }: ProjectOverlayProps
                     alt={project.name}
                     style={{ width: '100%', display: 'block', objectFit: 'cover' }}
                   />
-                </div>
-
-                {/* Placeholder grid for more media */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                  {[1, 2, 3, 4].map(i => (
-                    <div
-                      key={i}
-                      style={{
-                        height: 100,
-                        borderRadius: 10,
-                        background: 'rgba(180,151,207,0.06)',
-                        border: '1px dashed rgba(180,151,207,0.2)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'rgba(180,151,207,0.35)',
-                        fontFamily: "'Fira Code', monospace",
-                        fontSize: '0.65rem',
-                        letterSpacing: '0.08em',
-                      }}
-                    >
-                      media {i}
-                    </div>
-                  ))}
-                </div>
+                </div>*/}
               </motion.div>
 
               {/* Bottom spacer */}
-              <div style={{ height: 40 }} />
+              <div style={{ height: 120 }} />
             </div>
           </div>
         </motion.div>

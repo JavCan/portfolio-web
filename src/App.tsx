@@ -1,7 +1,7 @@
 import PixelBlast from './components/PixelBlast';
 import GradientText from './components/GradientText';
 import CircularText from './components/CircularText';
-import BlurText from './components/BlurText';
+import DecryptedText from './components/DecryptedText';
 import RippleCircle from './components/RippleCircle';
 import ContactForm from './components/ContactForm';
 import VerticalGallery from './components/VerticalGallery';
@@ -65,18 +65,28 @@ function App() {
             alignItems: 'flex-end'
           }}
         >
-          <BlurText
+          <DecryptedText
             text="JAVIER"
-            delay={150}
-            animateBy="letters"
-            direction="bottom"
+            animateOn="view"
+            speed={60}
+            maxIterations={15}
+            sequential
+            revealDirection="start"
+            characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*"
+            className="text-white"
+            encryptedClassName="text-[#B497CF]"
           />
           {showLastname && (
-            <BlurText
+            <DecryptedText
               text="CANELLA"
-              delay={120}
-              animateBy="letters"
-              direction="bottom"
+              animateOn="view"
+              speed={55}
+              maxIterations={15}
+              sequential
+              revealDirection="end"
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*"
+              className="text-white"
+              encryptedClassName="text-[#B497CF]"
               onAnimationComplete={() => setShowRest(true)}
             />
           )}

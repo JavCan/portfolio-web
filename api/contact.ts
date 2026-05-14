@@ -26,7 +26,7 @@ export default async function handler(req: Request) {
 
     const data = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>', // Update this with a verified domain for production
-      to: process.env.CONTACT_EMAIL || 'javier@canella.dev', // Fallback to a default if env is missing
+      to: process.env.CONTACT_EMAIL || 'javicanella69@gmail.com', // Fallback to a default if env is missing
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
