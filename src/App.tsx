@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 
 import project1 from './assets/Pulse.png';
 import project2 from './assets/FraudFishing.png';
-import project3 from './assets/medsync.png';
+import project3 from './assets/Medsync.png';
 import project4 from './assets/FirewallDefenders.png';
 import project5 from './assets/ddplata_portfolio.png';
 
