@@ -51,7 +51,7 @@ const PROJECT_DETAILS: Record<string, { description: string; tags: string[]; yea
     tags: ['Next.js', 'Three.js', 'React', 'Tailwind', 'Vercel'],
     year: '2026',
     role: 'Frontend Developer & Designer',
-    videos: ['https://vimeo.com/1192892133?fl=ip&fe=ec'],
+    videos: ['https://vimeo.com/1192893195?fl=ip&fe=ec'],
   },
 };
 
